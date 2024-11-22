@@ -7,6 +7,7 @@
 
 import UIKit
 
+
  class ViewController: UIViewController {
     
     private var mainView: MainView? {
@@ -20,8 +21,28 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "CV"
+        
+        mainView?.delegate = self
     }
 
+     @objc func shareButtonTap(){
+         print("share button tapped")
+     }
+     
+     @objc func previewButtonTap(){
+         print("preview button tapped")
+     }
 
 }
 
+extension ViewController: MainViewDelegate {
+    func shareButtonTapped() {
+        print("share button tap")
+    }
+    
+    func previewButtonTapped() {
+        print("preview button tap")
+    }
+    
+    
+}
