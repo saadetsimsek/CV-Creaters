@@ -16,9 +16,9 @@ final class MainView: UIView {
     
     weak var delegate: MainViewDelegate?
     
-    private let nameView = InfoView("Name")
-    private let emailView = InfoView("Email")
-    private let phoneView = InfoView("Phone")
+    private let nameView = InfoView("Name", type: .name)
+    private let emailView = InfoView("Email", type: .email)
+    private let phoneView = InfoView("Phone", type: .phone)
     private let photoImageView = InfoImageView(frame: .zero)
     private var experienceSegmentedConstrol : UISegmentedControl = {
         var segmenttedController = UISegmentedControl()
@@ -58,8 +58,29 @@ final class MainView: UIView {
         addConstraints()
     }
     
+    convenience init(delegate: InfoImageViewProtocol?) {
+        self.init()
+        photoImageView.delegate = delegate
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setImage(_ image: UIImage){
+        photoImageView.image = image
+        photoImageView.contentMode = .scaleAspectFill
+    }
+    
+    func getInfoText(_ viewType: ViewType) -> String{
+        switch viewType {
+        case .name:
+            return nameView.getText()
+        case .email:
+            return emailView.getText()
+        case .phone:
+            return phoneView.getText()
+        }
     }
     
     //MARK: - Setup UI
@@ -90,6 +111,7 @@ final class MainView: UIView {
         
     }
     
+  
     
 
     private func addConstraints(){

@@ -7,11 +7,18 @@
 
 import UIKit
 
+protocol InfoImageViewProtocol: AnyObject {
+    func didTap()
+}
+
 final class InfoImageView: UIImageView {
+    
+    weak var delegate: InfoImageViewProtocol?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        addTap()
     }
     
     required init?(coder: NSCoder) {
@@ -21,11 +28,22 @@ final class InfoImageView: UIImageView {
     private func configure(){
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .purple
-        image = UIImage(systemName: "")
+        image = UIImage(systemName: "photo.badge.plus")
         tintColor = .white
         contentMode = .center
         layer.cornerRadius = 10
         clipsToBounds = true
+    }
+    
+    private func addTap(){
+        let imageViewTap = UITapGestureRecognizer(target: self,
+                                                  action: #selector(handlerTap))
+        isUserInteractionEnabled = true
+        addGestureRecognizer(imageViewTap)
+    }
+    
+    @objc private func handlerTap(){
+        delegate?.didTap()
     }
     
 }

@@ -7,11 +7,18 @@
 
 import UIKit
 
+enum ViewType: CaseIterable{
+    case name
+    case email
+    case phone
+}
+
 class InfoView: UIView {
 
     private let titleLabel = UILabel(text: "")
     private let infoTextField = InfoTextField()
     private let lineView = UIView()
+    private var type: ViewType = .name
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,10 +30,23 @@ class InfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(_ title: String){ //yardımcı başlatıcı
+    convenience init(_ title: String, type: ViewType){ //yardımcı başlatıcı
         self.init()
         titleLabel.text = title
+        self.type = type
     }
+    
+    func getText() -> String {
+        guard let text = infoTextField.text else { return ""}
+        return text
+    }
+    
+
+}
+
+//MARK: - Setup UI
+
+extension InfoView {
     
     private func configureTitleLabel(){
         addSubview(titleLabel)
@@ -55,5 +75,4 @@ class InfoView: UIView {
             
         ])
     }
-
 }
