@@ -26,22 +26,22 @@ import UIKit
         
         
     }
-
-     @objc func shareButtonTap(){
-         print("share button tapped")
-     }
-     
-     @objc func previewButtonTap(){
-         print("preview button tapped")
-     }
      
      private func checkInfoField() -> Bool {
+         
+         var result = true
+         
          for type in ViewType.allCases{
              if mainView?.getInfoText(type) == ""{
                  //error shake view
-                 return false
+                 mainView?.setIsFailed(type, true)
+                 result = false
+             }
+             else {
+                 mainView?.setIsFailed(type, false)
              }
          }
+         return result
      }
 
 }
@@ -55,7 +55,7 @@ extension ViewController: MainViewDelegate {
     }
     
     func previewButtonTapped() {
-        print("preview button tap")
+        checkInfoField()
     }
 }
 

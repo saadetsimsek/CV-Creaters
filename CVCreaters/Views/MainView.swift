@@ -83,6 +83,17 @@ final class MainView: UIView {
         }
     }
     
+    func setIsFailed(_ viewType: ViewType, _ isFailed: Bool) { //ilgili görünümün hata durumu belirlenir
+        switch viewType {
+        case .name:
+            nameView.isFailed = isFailed
+        case .email:
+            emailView.isFailed = isFailed
+        case .phone:
+            phoneView.isFailed = isFailed
+        }
+    }
+    
     //MARK: - Setup UI
     
     private func setup(){

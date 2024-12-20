@@ -19,10 +19,27 @@ class InfoView: UIView {
     private let infoTextField = InfoTextField()
     private let lineView = UIView()
     private var type: ViewType = .name
+    
+    var isFailed = false {
+        didSet {
+            if self.isFailed {
+                titleLabel.textColor = .red
+                lineView.backgroundColor = .red
+                lineView.alpha = 1
+                shake()
+            }
+            else {
+                titleLabel.textColor = .systemGray
+                lineView.backgroundColor = .lightGray
+                lineView.alpha = 0.2
+            }
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureTitleLabel()
+        infoTextField.delegate = self
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -74,5 +91,17 @@ extension InfoView {
             lineView.heightAnchor.constraint(equalToConstant: 2)
             
         ])
+    }
+}
+
+//MARK: - Textfield Delegate
+
+extension InfoView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isFailed = false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        infoTextField.resignFirstResponder()
     }
 }
