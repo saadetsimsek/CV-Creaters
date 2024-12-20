@@ -72,6 +72,11 @@ final class MainView: UIView {
         photoImageView.contentMode = .scaleAspectFill
     }
     
+    func getImage() -> UIImage {
+        guard let defaultImage = UIImage(named: "hey") else { return UIImage()}
+        return photoImageView.image ?? defaultImage
+    }
+    
     func getInfoText(_ viewType: ViewType) -> String{
         switch viewType {
         case .name:
@@ -81,6 +86,10 @@ final class MainView: UIView {
         case .phone:
             return phoneView.getText()
         }
+    }
+    
+    func getSegmentedIndex() -> Int {
+        experienceSegmentedConstrol.selectedSegmentIndex
     }
     
     func setIsFailed(_ viewType: ViewType, _ isFailed: Bool) { //ilgili görünümün hata durumu belirlenir
