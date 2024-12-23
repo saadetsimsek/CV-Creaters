@@ -26,7 +26,8 @@ extension PDFCreater {
         let attributedText = NSAttributedString(string: text, attributes: textAttributes)
         
         //Metnin PDF sayfasında kaplayabileceği maksimum genişliği ayarlar.
-        let textSize = attributedText.boundingRect(with: CGSizeMake(currentPageRect.width - originalPoint.x * 2, .zero), options: [.usesLineFragmentOrigin], context: nil)
+    //    let textSize = attributedText.boundingRect(with: CGSizeMake(currentPageRect.width - originalPoint.x * 2, .zero), options: [.usesLineFragmentOrigin], context: nil)
+        let textSize = attributedText.boundingRect(with: CGSizeMake(currentPageRect.width - originalPoint.x - 10, .zero), options: [.usesLineFragmentOrigin], context: nil)
         
         //metin dikdörtgeni
         let textRect = CGRect(x: originalPoint.x,

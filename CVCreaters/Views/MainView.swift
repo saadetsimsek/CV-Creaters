@@ -73,8 +73,14 @@ final class MainView: UIView {
     }
     
     func getImage() -> UIImage {
-        guard let defaultImage = UIImage(named: "hey") else { return UIImage()}
-        return photoImageView.image ?? defaultImage
+        guard let defaultImage = UIImage(named: "hey"),
+              let image = photoImageView.image
+        else { return UIImage()}
+        if image == UIImage(systemName: "person.badge.plus"){
+            return defaultImage
+        }
+        return image
+     //   return photoImageView.image ?? defaultImage
     }
     
     func getInfoText(_ viewType: ViewType) -> String{

@@ -14,5 +14,9 @@ extension PDFCreater {
         let imageRect = addImage(originalPoint: photoOriginalPoint,
                                  image: image,
                                  size: currentPageRect.width * 0.2)
+        
+        let titlePoint = pdfCreateTitle(originalPoint: CGPoint(x: imageRect.maxX + 10,
+                                              y: imageRect.minY + 5))
+        pdfCreatePersonalInfo(originalPoint: CGPoint(x: titlePoint.x, y: titlePoint.y + 10))
     }
 }
