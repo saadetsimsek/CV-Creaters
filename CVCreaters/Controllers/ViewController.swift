@@ -55,17 +55,19 @@ extension ViewController: MainViewDelegate {
     }
     
     func previewButtonTapped() {
-      //  checkInfoField()
-        guard let mainView else {return}
-        let pdfCreater = PDFCreater(name: mainView.getInfoText(.name),
-                                    email: mainView.getInfoText(.email),
-                                    phone: mainView.getInfoText(.phone),
-                                    experience: mainView.getSegmentedIndex(),
-                                    image: mainView.getImage())
-        let pdfPreviewViewController = PDFPreviewViewController()
-        pdfPreviewViewController.documentData = pdfCreater.pdfCreatedData()
-        
-        navigationController?.pushViewController(pdfPreviewViewController, animated: true)
+        if checkInfoField() {
+            guard let mainView else {return}
+            let pdfCreater = PDFCreater(name: mainView.getInfoText(.name),
+                                        email: mainView.getInfoText(.email),
+                                        phone: mainView.getInfoText(.phone),
+                                        experience: mainView.getSegmentedIndex(),
+                                        image: mainView.getImage())
+            let pdfPreviewViewController = PDFPreviewViewController()
+            pdfPreviewViewController.documentData = pdfCreater.pdfCreatedData()
+            
+            navigationController?.pushViewController(pdfPreviewViewController, animated: true)
+        }
+    
     }
 }
 
