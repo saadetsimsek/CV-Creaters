@@ -50,8 +50,20 @@ import UIKit
 
 extension ViewController: MainViewDelegate {
     func shareButtonTapped() {
-        print("share button tap")
+       // print("share button tap")
        // mainView?.shake()
+        if checkInfoField() {
+            guard let mainView else {return}
+            let pdfCreater = PDFCreater(name: mainView.getInfoText(.name),
+                                        email: mainView.getInfoText(.email),
+                                        phone: mainView.getInfoText(.phone),
+                                        experience: mainView.getSegmentedIndex(),
+                                        image: mainView.getImage())
+            let pdgData = pdfCreater.pdfCreatedData()
+            let activityController = UIActivityViewController(activityItems: [pdgData],
+                                                              applicationActivities: [])
+            present(activityController, animated: true)
+        }
     }
     
     func previewButtonTapped() {
